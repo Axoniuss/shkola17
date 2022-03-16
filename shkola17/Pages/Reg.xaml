@@ -1,0 +1,35 @@
+﻿<Page x:Class="shkola17.Pages.Reg"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:shkola17.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Reg" Background="White" IsVisibleChanged="Page_Is_Visible_Changed">
+
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="267*"/>
+                <ColumnDefinition Width="398*"/>
+                <ColumnDefinition Width="135*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="86"/>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="59"/>
+                <RowDefinition Height="49"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBox x:Name="FIO" Text="{Binding FIO}" Grid.Column="1" Grid.Row="1" Height="40" Margin="109,10,113,15" Width="176"></TextBox>
+            <TextBox x:Name="Log" Text="{Binding Login}" Grid.Column="1" Grid.Row="2" Height="40" Margin="109,10,113,9" Width="176"></TextBox>
+            <TextBox x:Name="Pass" Text="{Binding Password}" Grid.Column="1" Grid.Row="3" Height="40" Margin="109,8,113,1" Width="176"></TextBox>
+            <TextBlock Text="ФИО" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="25"  Grid.Row="1" Height="34" Margin="0,14,0,17" Width="56" />
+            <TextBlock Text="Логин" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" FontSize="25" Height="34" Margin="0,14,0,11" Width="70"/>
+            <TextBlock Text="Пароль" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="25"  Grid.Row="3" Height="34" Margin="0,12,0,3" Width="86" />
+            <Button Content="Регистрация" Grid.Row="4" Background="#ab0044" Grid.Column="1" Height="50" VerticalAlignment="Top" FontSize="25" Click="Button_Click" Margin="109,5,113,0" Width="176"></Button>
+        </Grid>
+    </Grid>
+</Page>
