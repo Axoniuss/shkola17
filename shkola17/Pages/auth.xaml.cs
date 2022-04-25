@@ -32,7 +32,7 @@ namespace shkola17.Pages
             if (CurentUser != null)
             {
                 App.CurentUser = CurentUser;
-                NavigationService.Navigate(new Pages.Admin());
+                NavigationService.Navigate(new Pages.Admin(null));
                 //Manager.fframe.Navigate(new Pages.Page2(null));
             }
             else

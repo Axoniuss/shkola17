@@ -13,8 +13,8 @@ namespace shkola17
     /// </summary>
     public partial class App : Application
     {
-        public static Entities.invent_tehnikaEntities Context
-        { get; set; } = new Entities.invent_tehnikaEntities();
+        public static Entities.invent_tehnikaEntities1 Context
+        { get; set; } = new Entities.invent_tehnikaEntities1();
 
         public static Entities.user CurentUser = null;
 

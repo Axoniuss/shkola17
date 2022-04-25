@@ -45,7 +45,7 @@ namespace shkola17.Pages
 
         private void Page_Is_Visible_Changed(object sender, DependencyPropertyChangedEventArgs e)
         {
-            Entities.invent_tehnikaEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+            Entities.invent_tehnikaEntities1.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
         }
     }
 }

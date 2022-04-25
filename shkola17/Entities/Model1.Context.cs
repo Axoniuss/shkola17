@@ -13,17 +13,17 @@ namespace shkola17.Entities
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class invent_tehnikaEntities : DbContext
+    public partial class invent_tehnikaEntities1 : DbContext
     {
-        private static invent_tehnikaEntities _context;
-        public invent_tehnikaEntities()
-            : base("name=invent_tehnikaEntities")
+        private static Entities.invent_tehnikaEntities1 _context;
+        public invent_tehnikaEntities1()
+            : base("name=invent_tehnikaEntities1")
         {
         }
-        public static invent_tehnikaEntities GetContext()
+        public static Entities.invent_tehnikaEntities1 GetContext()
         {
             if (_context == null)
-                _context = new invent_tehnikaEntities();
+                _context = new Entities.invent_tehnikaEntities1();
             return _context;
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -33,8 +33,7 @@ namespace shkola17.Entities
     
         public virtual DbSet<broken_device> broken_device { get; set; }
         public virtual DbSet<Invent> Invent { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<model> model { get; set; }
         public virtual DbSet<user> user { get; set; }
-        public virtual DbSet<Images> Images { get; set; }
     }
 }

@@ -15,14 +15,13 @@ namespace shkola17.Entities
     public partial class Invent
     {
         public int ID_invent { get; set; }
-        public Nullable<int> floor { get; set; }
         public string cabinet { get; set; }
         public string Tehnika { get; set; }
-        public string internal_devices { get; set; }
         public string FIO_upravl { get; set; }
-        public Nullable<System.DateTime> date_buy { get; set; }
+        public string date_buy { get; set; }
         public byte[] photo { get; set; }
     
         public virtual broken_device broken_device { get; set; }
+        public virtual model model { get; set; }
     }
 }

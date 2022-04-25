@@ -6,9 +6,70 @@
       xmlns:local="clr-namespace:shkola17.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Admin">
+      Title="Admin" IsVisibleChanged="Page_Is_Visible_Changed">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Введите номер кабинета:" VerticalAlignment="Center"  TextAlignment="Right" FontWeight="Bold" FontSize="15"></TextBlock>
+                <TextBox Width="225" Name="TBSearch" TextChanged="TBSearch_TextChanged"></TextBox>
+            </StackPanel>
+
+        </WrapPanel>
+
+        <ListView Grid.Row="1" Name="LView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Center">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="20" Width="400">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"></RowDefinition>
+                            <RowDefinition Height="310"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Image Width="400" Grid.Row="1" Stretch="UniformToFill" HorizontalAlignment="Center" Margin="5">
+                            <Image.Source>
+                                <Binding Path="photo">
+
+                                </Binding>
+                            </Image.Source>
+                        </Image>
+
+                        <TextBlock Text = "{Binding Tehnika}"  VerticalAlignment="Center" TextAlignment="Center" Width="390"
+                                   TextWrapping="Wrap" HorizontalAlignment="Center" Margin="2" FontSize="21" Grid.Row="0"></TextBlock>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2">
+                            <TextBlock Text="Управляющий: "  FontSize="14" HorizontalAlignment="Left"></TextBlock>
+                            <TextBlock  Text="{Binding FIO_upravl}" FontSize="14" HorizontalAlignment="Left"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3">
+                            <TextBlock Text="Номер Кабинета: "  FontSize="14" HorizontalAlignment="Left"></TextBlock>
+                            <TextBlock  Text="{Binding cabinet}" FontSize="14" HorizontalAlignment="Left"></TextBlock>
+                        </StackPanel>
+
+                        <Button Content="Редактировать"  Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" Click="zakazbutton"/>
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackPanel Grid.Row="1" Height="45" Width="391" VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button x:Name="buttonadd" Grid.Row="2" Height="30" Width="150"  Content="Добавить" Click="Add_Color"></Button>
+            <Button x:Name="buttoninfo" Grid.Row="2" Height="30" Width="150"  Content="Устройства" Click="info_Color"></Button>
+
+        </StackPanel>
+        <Button x:Name="buttondel" Grid.Row="2"  Height="30" Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="Удалить" Click="buttondel_Click" ></Button>
+
     </Grid>
 </Page>

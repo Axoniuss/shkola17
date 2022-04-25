@@ -23,7 +23,7 @@ namespace shkola17
         public MainWindow()
         {
             InitializeComponent();
-            fframe.Navigate(new Pages.auth());
+            fframe.Navigate(new Pages.auth()); //frame admin delete null
             Manager.fframe = fframe;
         }
 

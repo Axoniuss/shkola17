@@ -12,12 +12,14 @@ namespace shkola17.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class model
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int Id_inv { get; set; }
+        public string device { get; set; }
+        public string printer { get; set; }
+        public string scanner { get; set; }
+        public string proektop { get; set; }
+    
+        public virtual Invent Invent { get; set; }
     }
 }
