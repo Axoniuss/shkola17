@@ -15,8 +15,10 @@
         </Grid.RowDefinitions>
         <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Введите номер кабинета:" VerticalAlignment="Center"  TextAlignment="Right" FontWeight="Bold" FontSize="15"></TextBlock>
-                <TextBox Width="225" Name="TBSearch" TextChanged="TBSearch_TextChanged"></TextBox>
+                <TextBlock Text="Введите номер кабинета:" VerticalAlignment="Center"   FontWeight="Bold" FontSize="15"></TextBlock>
+                <TextBox Width="35" Name="TBSearch" TextChanged="TBSearch_TextChanged"></TextBox>
+                <TextBlock Text="Введите ФИО учителя:" VerticalAlignment="Center"   FontWeight="Bold" FontSize="15"></TextBlock>
+                <TextBox Width="225" Name="TBSearch1" TextChanged="TBSearch_TextChanged1"></TextBox>
             </StackPanel>
 
         </WrapPanel>
@@ -66,7 +68,7 @@
 
         <StackPanel Grid.Row="1" Height="45" Width="391" VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Left">
             <Button x:Name="buttonadd" Grid.Row="2" Height="30" Width="150"  Content="Добавить" Click="Add_Color"></Button>
-            <Button x:Name="buttoninfo" Grid.Row="2" Height="30" Width="150"  Content="Устройства" Click="info_Color"></Button>
+            <Button x:Name="buttoninfo" Grid.Row="2" Height="30" Width="150"  Content="Сотрудники" Click="info_Color"></Button>
 
         </StackPanel>
         <Button x:Name="buttondel" Grid.Row="2"  Height="30" Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="Удалить" Click="buttondel_Click" ></Button>

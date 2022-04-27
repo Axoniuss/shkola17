@@ -20,7 +20,8 @@ namespace shkola17.Pages
     /// </summary>
     public partial class info : Page
     {
-        public info()
+        private Entities.sotr _currentcar = new Entities.sotr();
+        public info(Entities.sotr client)
         {
             InitializeComponent();
         }
@@ -29,8 +30,28 @@ namespace shkola17.Pages
             if (Visibility == Visibility.Visible)
             {
                 Entities.invent_tehnikaEntities1.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
-                LView.ItemsSource = Entities.invent_tehnikaEntities1.GetContext().model.ToList();
+                dtclient.ItemsSource = Entities.invent_tehnikaEntities1.GetContext().sotr.ToList();
             }
+        }
+
+        private void btn_edit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void dtclient_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -22,8 +22,8 @@ namespace shkola17.Entities
     
         public int ID_sotr { get; set; }
         public string FIO_sotr { get; set; }
-        public string Doljnost { get; set; }
         public string teleph { get; set; }
+        public string Doljnost { get; set; }
         public string organizaci { get; set; }
         public string oborud_use { get; set; }
     

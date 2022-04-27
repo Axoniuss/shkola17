@@ -5,15 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Хранилище invent_tehnikaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="broken_device">
-          <Key>
-            <PropertyRef Name="ID_invent" />
-          </Key>
-          <Property Name="ID_invent" Type="int" Nullable="false" />
-          <Property Name="vid_tehnika" Type="varchar" MaxLength="50" />
-          <Property Name="Comment" Type="varchar" MaxLength="50" />
-          <Property Name="date_broken" Type="varchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="Invent">
           <Key>
             <PropertyRef Name="ID_invent" />
@@ -24,6 +15,7 @@
           <Property Name="FIO_upravl" Type="varchar" MaxLength="50" />
           <Property Name="date_buy" Type="varchar" MaxLength="50" />
           <Property Name="photo" Type="varbinary(max)" />
+          <Property Name="id_sotr" Type="int" />
         </EntityType>
         <EntityType Name="model">
           <Key>
@@ -35,6 +27,27 @@
           <Property Name="scanner" Type="varchar" MaxLength="50" />
           <Property Name="proektop" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="sotr">
+          <Key>
+            <PropertyRef Name="ID_sotr" />
+          </Key>
+          <Property Name="ID_sotr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIO_sotr" Type="nchar" MaxLength="50" />
+          <Property Name="teleph" Type="nchar" MaxLength="50" />
+          <Property Name="Doljnost" Type="nchar" MaxLength="50" />
+          <Property Name="organizaci" Type="nchar" MaxLength="50" />
+          <Property Name="oborud_use" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="user">
           <Key>
             <PropertyRef Name="ID_user" />
@@ -44,15 +57,15 @@
           <Property Name="Login" Type="varchar" MaxLength="50" />
           <Property Name="Pass" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_broken_device_Invent">
-          <End Role="Invent" Type="Self.Invent" Multiplicity="1" />
-          <End Role="broken_device" Type="Self.broken_device" Multiplicity="0..1" />
+        <Association Name="FK_Invent_sotr">
+          <End Role="sotr" Type="Self.sotr" Multiplicity="0..1" />
+          <End Role="Invent" Type="Self.Invent" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Invent">
-              <PropertyRef Name="ID_invent" />
+            <Principal Role="sotr">
+              <PropertyRef Name="ID_sotr" />
             </Principal>
-            <Dependent Role="broken_device">
-              <PropertyRef Name="ID_invent" />
+            <Dependent Role="Invent">
+              <PropertyRef Name="id_sotr" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -69,13 +82,14 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище invent_tehnikaModelContainer">
-          <EntitySet Name="broken_device" EntityType="Self.broken_device" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invent" EntityType="Self.Invent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="model" EntityType="Self.model" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sotr" EntityType="Self.sotr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_broken_device_Invent" Association="Self.FK_broken_device_Invent">
+          <AssociationSet Name="FK_Invent_sotr" Association="Self.FK_Invent_sotr">
+            <End Role="sotr" EntitySet="sotr" />
             <End Role="Invent" EntitySet="Invent" />
-            <End Role="broken_device" EntitySet="broken_device" />
           </AssociationSet>
           <AssociationSet Name="FK_model_Invent" Association="Self.FK_model_Invent">
             <End Role="Invent" EntitySet="Invent" />
@@ -86,16 +100,21 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="invent_tehnikaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="broken_device">
-          <Key>
-            <PropertyRef Name="ID_invent" />
-          </Key>
-          <Property Name="ID_invent" Type="Int32" Nullable="false" />
-          <Property Name="vid_tehnika" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="date_broken" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Invent" Relationship="Self.FK_broken_device_Invent" FromRole="broken_device" ToRole="Invent" />
-        </EntityType>
+        <EntityContainer Name="invent_tehnikaEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Invent" EntityType="invent_tehnikaModel.Invent" />
+          <EntitySet Name="model" EntityType="invent_tehnikaModel.model" />
+          <EntitySet Name="sotr" EntityType="invent_tehnikaModel.sotr" />
+          <EntitySet Name="sysdiagrams" EntityType="invent_tehnikaModel.sysdiagrams" />
+          <EntitySet Name="user" EntityType="invent_tehnikaModel.user" />
+          <AssociationSet Name="FK_Invent_sotr" Association="invent_tehnikaModel.FK_Invent_sotr">
+            <End Role="sotr" EntitySet="sotr" />
+            <End Role="Invent" EntitySet="Invent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_model_Invent" Association="invent_tehnikaModel.FK_model_Invent">
+            <End Role="Invent" EntitySet="Invent" />
+            <End Role="model" EntitySet="model" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Invent">
           <Key>
             <PropertyRef Name="ID_invent" />
@@ -106,8 +125,9 @@
           <Property Name="FIO_upravl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="date_buy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="broken_device" Relationship="Self.FK_broken_device_Invent" FromRole="Invent" ToRole="broken_device" />
-          <NavigationProperty Name="model" Relationship="Self.FK_model_Invent" FromRole="Invent" ToRole="model" />
+          <Property Name="id_sotr" Type="Int32" />
+          <NavigationProperty Name="sotr" Relationship="invent_tehnikaModel.FK_Invent_sotr" FromRole="Invent" ToRole="sotr" />
+          <NavigationProperty Name="model" Relationship="invent_tehnikaModel.FK_model_Invent" FromRole="Invent" ToRole="model" />
         </EntityType>
         <EntityType Name="model">
           <Key>
@@ -118,7 +138,29 @@
           <Property Name="printer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="scanner" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="proektop" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Invent" Relationship="Self.FK_model_Invent" FromRole="model" ToRole="Invent" />
+          <NavigationProperty Name="Invent" Relationship="invent_tehnikaModel.FK_model_Invent" FromRole="model" ToRole="Invent" />
+        </EntityType>
+        <EntityType Name="sotr">
+          <Key>
+            <PropertyRef Name="ID_sotr" />
+          </Key>
+          <Property Name="ID_sotr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FIO_sotr" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="teleph" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Doljnost" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="organizaci" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="oborud_use" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Invent" Relationship="invent_tehnikaModel.FK_Invent_sotr" FromRole="sotr" ToRole="Invent" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -129,21 +171,21 @@
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK_broken_device_Invent">
-          <End Role="Invent" Type="Self.Invent" Multiplicity="1" />
-          <End Role="broken_device" Type="Self.broken_device" Multiplicity="0..1" />
+        <Association Name="FK_Invent_sotr">
+          <End Type="invent_tehnikaModel.sotr" Role="sotr" Multiplicity="0..1" />
+          <End Type="invent_tehnikaModel.Invent" Role="Invent" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Invent">
-              <PropertyRef Name="ID_invent" />
+            <Principal Role="sotr">
+              <PropertyRef Name="ID_sotr" />
             </Principal>
-            <Dependent Role="broken_device">
-              <PropertyRef Name="ID_invent" />
+            <Dependent Role="Invent">
+              <PropertyRef Name="id_sotr" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_model_Invent">
-          <End Role="Invent" Type="Self.Invent" Multiplicity="1" />
-          <End Role="model" Type="Self.model" Multiplicity="0..1" />
+          <End Type="invent_tehnikaModel.Invent" Role="Invent" Multiplicity="1" />
+          <End Type="invent_tehnikaModel.model" Role="model" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Invent">
               <PropertyRef Name="ID_invent" />
@@ -153,66 +195,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="invent_tehnikaEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="broken_device" EntityType="Self.broken_device" />
-          <EntitySet Name="Invent" EntityType="Self.Invent" />
-          <EntitySet Name="model" EntityType="Self.model" />
-          <EntitySet Name="user" EntityType="Self.user" />
-          <AssociationSet Name="FK_broken_device_Invent" Association="Self.FK_broken_device_Invent">
-            <End Role="Invent" EntitySet="Invent" />
-            <End Role="broken_device" EntitySet="broken_device" />
-          </AssociationSet>
-          <AssociationSet Name="FK_model_Invent" Association="Self.FK_model_Invent">
-            <End Role="Invent" EntitySet="Invent" />
-            <End Role="model" EntitySet="model" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище invent_tehnikaModelContainer" CdmEntityContainer="invent_tehnikaEntities1">
-          <EntitySetMapping Name="broken_device">
-            <EntityTypeMapping TypeName="invent_tehnikaModel.broken_device">
-              <MappingFragment StoreEntitySet="broken_device">
-                <ScalarProperty Name="ID_invent" ColumnName="ID_invent" />
-                <ScalarProperty Name="vid_tehnika" ColumnName="vid_tehnika" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="date_broken" ColumnName="date_broken" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Invent">
             <EntityTypeMapping TypeName="invent_tehnikaModel.Invent">
               <MappingFragment StoreEntitySet="Invent">
-                <ScalarProperty Name="ID_invent" ColumnName="ID_invent" />
-                <ScalarProperty Name="cabinet" ColumnName="cabinet" />
-                <ScalarProperty Name="Tehnika" ColumnName="Tehnika" />
-                <ScalarProperty Name="FIO_upravl" ColumnName="FIO_upravl" />
-                <ScalarProperty Name="date_buy" ColumnName="date_buy" />
+                <ScalarProperty Name="id_sotr" ColumnName="id_sotr" />
                 <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="date_buy" ColumnName="date_buy" />
+                <ScalarProperty Name="FIO_upravl" ColumnName="FIO_upravl" />
+                <ScalarProperty Name="Tehnika" ColumnName="Tehnika" />
+                <ScalarProperty Name="cabinet" ColumnName="cabinet" />
+                <ScalarProperty Name="ID_invent" ColumnName="ID_invent" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="model">
             <EntityTypeMapping TypeName="invent_tehnikaModel.model">
               <MappingFragment StoreEntitySet="model">
-                <ScalarProperty Name="Id_inv" ColumnName="Id_inv" />
-                <ScalarProperty Name="device" ColumnName="device" />
-                <ScalarProperty Name="printer" ColumnName="printer" />
-                <ScalarProperty Name="scanner" ColumnName="scanner" />
                 <ScalarProperty Name="proektop" ColumnName="proektop" />
+                <ScalarProperty Name="scanner" ColumnName="scanner" />
+                <ScalarProperty Name="printer" ColumnName="printer" />
+                <ScalarProperty Name="device" ColumnName="device" />
+                <ScalarProperty Name="Id_inv" ColumnName="Id_inv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sotr">
+            <EntityTypeMapping TypeName="invent_tehnikaModel.sotr">
+              <MappingFragment StoreEntitySet="sotr">
+                <ScalarProperty Name="oborud_use" ColumnName="oborud_use" />
+                <ScalarProperty Name="organizaci" ColumnName="organizaci" />
+                <ScalarProperty Name="Doljnost" ColumnName="Doljnost" />
+                <ScalarProperty Name="teleph" ColumnName="teleph" />
+                <ScalarProperty Name="FIO_sotr" ColumnName="FIO_sotr" />
+                <ScalarProperty Name="ID_sotr" ColumnName="ID_sotr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="invent_tehnikaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="user">
             <EntityTypeMapping TypeName="invent_tehnikaModel.user">
               <MappingFragment StoreEntitySet="user">
-                <ScalarProperty Name="ID_user" ColumnName="ID_user" />
-                <ScalarProperty Name="FIO_upravl" ColumnName="FIO_upravl" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="FIO_upravl" ColumnName="FIO_upravl" />
+                <ScalarProperty Name="ID_user" ColumnName="ID_user" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -85,7 +85,14 @@ namespace shkola17.Pages
 
         private void info_Color(object sender, RoutedEventArgs e)
         {
-            Manager.fframe.Navigate(new Pages.info());
+            Manager.fframe.Navigate(new Pages.info(null));
+        }
+
+        private void TBSearch_TextChanged1(object sender, TextChangedEventArgs e)
+        {
+            var _currentcar = Entities.invent_tehnikaEntities1.GetContext().Invent.ToList();
+            _currentcar = _currentcar.Where(p => p.FIO_upravl.ToLower().Contains(TBSearch.Text.ToLower())).ToList();
+            LView.ItemsSource = _currentcar.OrderBy(p => p.FIO_upravl).ToList();
         }
     }
 }

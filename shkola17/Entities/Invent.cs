@@ -20,8 +20,9 @@ namespace shkola17.Entities
         public string FIO_upravl { get; set; }
         public string date_buy { get; set; }
         public byte[] photo { get; set; }
+        public Nullable<int> id_sotr { get; set; }
     
-        public virtual broken_device broken_device { get; set; }
+        public virtual sotr sotr { get; set; }
         public virtual model model { get; set; }
     }
 }

@@ -31,9 +31,10 @@ namespace shkola17.Entities
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<broken_device> broken_device { get; set; }
         public virtual DbSet<Invent> Invent { get; set; }
         public virtual DbSet<model> model { get; set; }
+        public virtual DbSet<sotr> sotr { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<user> user { get; set; }
     }
 }

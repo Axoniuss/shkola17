@@ -4,13 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6f3d43c823164dc2a43dc22e7ed947c2" Name="Diagram1" ZoomLevel="114">
-        <EntityTypeShape EntityType="invent_tehnikaModel.broken_device" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="invent_tehnikaModel.Invent" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="invent_tehnikaModel.model" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="invent_tehnikaModel.user" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
-        <AssociationConnector Association="invent_tehnikaModel.FK_broken_device_Invent" ManuallyRouted="false" />
-        <AssociationConnector Association="invent_tehnikaModel.FK_model_Invent" ManuallyRouted="false" />
+      <Diagram DiagramId="6f3d43c823164dc2a43dc22e7ed947c2" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="invent_tehnikaModel.Invent" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="invent_tehnikaModel.model" Width="1.5" PointX="5.25" PointY="1.25" />
+        <EntityTypeShape EntityType="invent_tehnikaModel.sotr" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="invent_tehnikaModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="invent_tehnikaModel.user" Width="1.5" PointX="2.75" PointY="4.75" />
+        <AssociationConnector Association="invent_tehnikaModel.FK_Invent_sotr" />
+        <AssociationConnector Association="invent_tehnikaModel.FK_model_Invent" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
