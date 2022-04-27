@@ -94,5 +94,8 @@ namespace shkola17.Pages
             _currentcar = _currentcar.Where(p => p.FIO_upravl.ToLower().Contains(TBSearch.Text.ToLower())).ToList();
             LView.ItemsSource = _currentcar.OrderBy(p => p.FIO_upravl).ToList();
         }
+
+    
+        
     }
 }

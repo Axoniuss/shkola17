@@ -48,9 +48,17 @@ namespace shkola17.Pages
             if (_currentcar.ID_invent == 0)
             {
                 Entities.invent_tehnikaEntities1.GetContext().Invent.Add(_currentcar);
-                Entities.invent_tehnikaEntities1.GetContext().SaveChanges();
                 MessageBox.Show("Добавление выполнено");
                 Manager.fframe.GoBack();
+            }
+            try
+            {
+                Entities.invent_tehnikaEntities1.GetContext().SaveChanges();
+                MessageBox.Show("Информация изменена");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
             }
         }
 
