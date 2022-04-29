@@ -36,7 +36,7 @@ namespace shkola17.Pages
 
         private void btn_edit_Click(object sender, RoutedEventArgs e)
         {
-
+            Manager.fframe.Navigate(new Pages.addeditsotr((sender as Button).DataContext as Entities.sotr));
         }
 
         private void button11_Click(object sender, RoutedEventArgs e)
@@ -52,6 +52,35 @@ namespace shkola17.Pages
         private void dtclient_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void buttondel_Click(object sender, RoutedEventArgs e)
+        {
+            var CarsForRemoving = dtclient.SelectedItems.Cast<Entities.sotr>().ToList();
+
+
+            if (MessageBox.Show($"Вы уверены, что хотите удалить данные о " + $"{CarsForRemoving.Count}столбце", "Внимание",
+                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    Entities.invent_tehnikaEntities1.GetContext().sotr.RemoveRange(CarsForRemoving);
+                    Entities.invent_tehnikaEntities1.GetContext().SaveChanges();
+                    MessageBox.Show("Удаление завершено");
+                    dtclient.ItemsSource = Entities.invent_tehnikaEntities1.GetContext().sotr.ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+
+
+            }
+        }
+
+        private void Add_Color(object sender, RoutedEventArgs e)
+        {
+            Manager.fframe.Navigate(new Pages.addeditsotr(null));
         }
     }
 }

@@ -27,7 +27,7 @@
                     <DataGridTextColumn Header="Должность" Binding="{Binding Doljnost}" Width="108"></DataGridTextColumn>
                     <DataGridTextColumn Header="Организация" Binding="{Binding organizaci}" Width="153"></DataGridTextColumn>
                     <DataGridTextColumn Header="Кол-во обор." Binding="{Binding oborud_use}" Width="66"></DataGridTextColumn>
-             
+
                     <DataGridTemplateColumn Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -41,14 +41,18 @@
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="484*"/>
-                <ColumnDefinition Width="309*"/>
+                <ColumnDefinition Width="469*"/>
+                <ColumnDefinition Width="331*"/>
             </Grid.ColumnDefinitions>
-     
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                <Button x:Name="buttonadd" Height="30" Width="165" Content="Добавить сотрудника" Click="Add_Color"     Margin="5,0,5,11"  />
+                <Button x:Name="buttondel"  Height="30" Width="150"   Content="Удалить" Click="buttondel_Click"  Margin="5,0,5,11" />
+            </StackPanel>
 
-   
+
+
         </Grid>
-   
+
 
     </Grid>
 </Page>
